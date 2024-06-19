@@ -27,20 +27,40 @@ describe('Book', () => {
   it('check title is not empty', () => {
     expect(() => myBook = new Book('', 'Horacio Quiroga', 350)).toThrow();
   });
-
+  
   it('check author is a string', () => {
-    // TODO
+    expect(() => myBook = new Book('Titulo', null, 350)).toThrow();
+  });
+
+  it('empty author is converted to "Anónimo"', () => {
+    const anonBook = new Book('Titulo', '', 350);
+    expect(anonBook.getAuthor()).toBe('Anónimo');
   });
 
   it('check page param is a number', () => {
-    // TODO
+    expect(() => myBook = new Book('Titulo', 'Autor', 'a')).toThrow();
   });
 
   it('check pages not < 1', () => {
-    // TODO
+    expect(() => myBook = new Book('Titulo', 'Autor', 0)).toThrow();
   });
+
   it('toString()', () => {
-    // TODO
+    expect(myBook.toString()).toBe('Título: Cuentos de la Selva Autor: Horacio Quiroga Páginas: 350');
+  });
+
+  it('check words is a number', () => {
+    expect(() => myBook.setWords('a')).toThrow();
+  });
+
+  it('return words', () => {
+    myBook.setWords(70000);
+    expect(myBook.getWords()).toBe(70000);
+  });
+
+  it('return words per page', () => {
+    myBook.setWords(70000);
+    expect(myBook.wordsPerPage()).toBe(200);
   });
 
 });

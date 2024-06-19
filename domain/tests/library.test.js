@@ -30,8 +30,28 @@ describe('Library', () => {
   it('throw an error when setting an invalid name', () => {
     expect(() => myLibrary.setName(123)).toThrow();
   });
+
   it('throw an error when setting an empty name', () => {
-    // TODO
+    expect(() => myLibrary.setName('')).toThrow();
   });
+
+  it('return the total number of words', () => {
+    const book1 = myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120);
+    const book2 = myLibrary.addBook('El Hombre que Calculaba', 'Malba Tahan', 286);
+    book1.setWords(70000);
+    book2.setWords(50001);
+    expect(myLibrary.totalWords()).toBe(120001);
+  });
+
+  it('do not add if words is undefined', () => {
+    const book1 = myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120);
+    const book2 = myLibrary.addBook('El Hombre que Calculaba', 'Malba Tahan', 286);
+    const book3 = myLibrary.addBook('Fundación', 'Isaac Asimov', 400);
+    book1.setWords(70000);
+    book2.setWords(50001);
+    expect(book3.getWords()).toBeUndefined();
+    expect(myLibrary.totalWords()).toBe(120001);
+  });
+
 
 });
